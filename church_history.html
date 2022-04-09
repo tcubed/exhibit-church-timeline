@@ -1,0 +1,177 @@
+<html>
+<head>
+   <title>Church History Timeline</title>
+ 
+   <link id="mydata" href="churchdata.js" type="application/json" rel="exhibit/data" />
+
+   <script src="http://api.simile-widgets.org/exhibit/2.2.0/exhibit-api.js" type="text/javascript"></script>
+   <script src="http://api.simile-widgets.org/exhibit/2.2.0/extensions/time/time-extension.js" type="text/javascript"></script>
+   
+   <script src="http://api.simile-widgets.org/exhibit/2.2.0/extensions/map/map-extension.js?gmapkey=ABQIAAAANhu0fM9snw4vHwrGCMJ_nhTu6pxcDaR2ByxQmvDKl6VumfgQzBSJ8BHqVjHtZ1d_NHdSWCu9gftj_w"
+           type="text/javascript"></script>
+        <!--   
+   <script src="timelineconfig.js" type="text/javascript"></script>
+  
+   <script src="mytimelineconstructor.js" type="text/javascript"></script>
+    -->
+   <style>
+       body {
+           margin: 0.1in;
+       }
+       table.event {
+           border:     1px solid #ddd;
+           padding:    0.5em;
+           font-size: 100%;
+       }
+       div.name {
+           font-weight: bold;
+           font-size:   100%;
+       }
+       div.exhibit-facet-body{
+          height: 8em;
+       }
+       div.timeline-container{
+          font-size: 12pt;
+       }
+       .category {
+       }
+       .year {
+           font-style:  italic;
+       }
+       .content {
+           color:  #888;
+       }
+        
+   </style>
+</head> 
+<body >
+   <h1>Church History Timeline</h1>
+   <p>This is a bible timeline viewer for the Fall 2008 "Church Unleashed" 
+Spiritual Boot Camp class at Appleton Alliance Church.
+<hr>
+
+   <script src="timelineconfig.js" type="text/javascript"></script>
+
+   <div ex:role="coder" ex:coderClass="Color" id="mycolorcoder">
+   <span ex:color="red">East</span>
+   <span ex:color="blue">West</span>
+   <span ex:color="blue">Rome</span>
+   <span ex:color="red">Islam</span>
+   <span ex:color="red">Muslim</span>
+   <span ex:color="orange">Reformation</span>
+   <span ex:color="brown">Crusades</span>
+   <span ex:color="#2F2">Political</span>
+   <span ex:color="gray"  ex:case="others">Other categories</span>
+   <span ex:color="gray" ex:case="mixed">Mixed</span>
+   <span ex:color="black" ex:case="missing">No categories</span>
+   </div>
+   
+   <table width="100%">
+       <tr valign="top">
+           <td ex:role="viewPanel" >
+               
+              <div ex:role="view"
+                   ex:label="View Events"
+                   ex:orders=".century, .start, .end, .category"
+                   ex:possibleOrders=".century, .start, .end, .category">
+              </div>
+              <div ex:role="view"
+                   ex:viewClass="Timeline"
+                   ex:label="View Timeline"
+                   ex:start=".start"
+                   ex:end=".end"
+                   ex:colorCoder="mycolorcoder"
+                   ex:colorKey=".category"
+                   ex:configuration="timelineConfig">
+               </div>
+               <div ex:role="view"
+                   ex:viewClass="Map"
+                   ex:label="View Map"
+                   ex:zoom="4"
+                   ex:scaleControl="TRUE"
+                   ex:overviewControl="TRUE"
+                   ex:center="36,29"
+                   ex:latlng=".LatLng"
+                   ex:colorKey=".category">
+               </div>
+                <!--
+                   ex:topBandUnit="decade"
+                   ex:bottomBandUnit="century"
+                   -->
+               <table ex:role="lens" class="event">
+                   <tr>
+                       <td>
+<div ex:if-exists=".image"><img ex:src-content=".image" /></div>
+                       </td>
+                       <td>
+                           <div ex:content=".title" class="name"></div>
+                           <div class="year">start: 
+                               <span ex:content=".start" class="year"></span>
+                           </div>
+                           <div ex:if-exists=".end" class="year">end:  
+                               <span ex:content=".end"></span>
+                           </div>
+                           <div ex:content=".content" class="content"></div>
+                           <div ex:if-exists=".category" >Categories: 
+                               <span ex:content=".category"></span>
+                           </div>
+                       </td>
+                   </tr>
+               </table>
+                   
+                              <!--
+               <div ex:role="exhibit-view"
+                   ex:viewClass="Exhibit.TabularView"
+                   ex:columns=".title, .image, .start, .end, .content"
+                   ex:columnLabels="name, photo, start, end, detail"
+                   ex:columnFormats="list, image, list, list, list"
+                   ex:sortColumn="2"
+                   ex:sortAscending="true">
+               </div>
+               -->    
+               
+               
+            </td>
+           <td width="25%">
+               <div ex:role="facet" ex:facetClass="TextSearch" ex:facetLabel="Text Search"></div>
+               <div ex:role="facet" ex:height="70" ex:expression=".author" ex:facetLabel="Author"></div>
+               <div ex:role="facet" 
+                    ex:facetClass="NumericRange" 
+                    ex:height="100" 
+                    ex:expression=".century" 
+                    ex:facetLabel="Century" 
+                    ex:interval="3"></div>
+               <div ex:role="facet" ex:expression=".category" ex:facetLabel="Category"></div>
+           </td>
+       </tr>
+   </table>
+
+<ol>
+   <li>"Church History in Plain Language", Shelley, Bruce.</li>
+   <li>"Handbook to the Bible", Zondervan.</li>
+</ol>
+ <hr>
+<h4>Want to see your content in the viewer?</h4>
+<p>Consult the <a href="timeline_instructions.pdf">Timeline Instructions (pdf)</a>
+and the example Excel <a href="timeline1.xls">spreadsheet</a> 
+(97-2003, .xls format), that you can use
+to prepare your content for the timeline viewer.
+Please remember to keep content simple: use single(') instead of double quotes("),
+use "first" instead of 1st, and so on.  These cause problems.
+<p>If you don't have Excel, check
+out <a href="http://www.openoffice.org/index.html">Open Office</a> as a free 
+alternative.  E-mail your file to 
+<a href="mailto:tedtower1@yahoo.com">tedtower1@yahoo.com</a>.
+I'll add your content.
+    
+<h4>For more information...</h4>
+<p>This project uses MIT's <a href="http://simile.mit.edu/">SIMILE</a> group to reuse digital
+assets, specifically it's <a href="http://simile.mit.edu/timeline/">Timeline</a>
+and <a href="http://simile.mit.edu/exhibit/">Exhibit</a>
+projects.  Not surprisingly, someone has created a 
+<a href="http://simile.mit.edu/timeline/examples/religions/religions.html">
+Jewish and Christian History</a> timeline linked to Wikipedia
+articles where you can go to for related content.
+   
+</body>
+</html>
